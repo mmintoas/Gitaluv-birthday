@@ -42,15 +42,21 @@ document.getElementById('surpriseBtn').addEventListener('click', () => {
     alert('Surprise! Kamu adalah yang terbaik, Anggita! 🎉😍');
 });
 
-// Lagu1 otomatis diputar saat load, dengan fallback jika autoplay diblokir
+// Tombol Mulai Pesta (memulai audio dan menampilkan tombol lain)
+const startPartyBtn = document.getElementById('startPartyBtn');
+const confettiBtn = document.getElementById('confettiBtn');
+const surpriseBtn = document.getElementById('surpriseBtn');
 const lagu1 = document.getElementById('lagu1');
-window.addEventListener('load', () => {
-    lagu1.play().catch(() => {
-        alert('Browser memblokir autoplay lagu. Refresh halaman atau izinkan autoplay untuk mendengarkan lagu!');
-    });
-});
+const bgMusic = document.getElementById('bgMusic');
 
-// Confetti otomatis saat load
-window.addEventListener('load', () => {
-    confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+startPartyBtn.addEventListener('click', () => {
+    // Mulai lagu setelah klik (tidak diblokir)
+    lagu1.play();
+    bgMusic.play();
+    // Sembunyikan tombol mulai, tampilkan tombol lain
+    startPartyBtn.classList.add('hidden');
+    confettiBtn.classList.remove('hidden');
+    surpriseBtn.classList.remove('hidden');
+    // Confetti awal
+    confetti({ particleCount: 100, spread: 70 });
 });
