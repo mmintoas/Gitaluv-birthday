@@ -1,15 +1,3 @@
-// Countdown ke ulang tahun berikutnya (17 Februari 2025)
-function updateCountdown() {
-    const now = new Date();
-    const nextBirthday = new Date(now.getFullYear() + 1, 1, 17); // Februari adalah bulan 1 (0-indexed)
-    const diff = nextBirthday - now;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById('countdown').textContent = `${days} hari ${hours} jam lagi!`;
-}
-updateCountdown();
-setInterval(updateCountdown, 60000); // Update setiap menit
-
 // Animasi scroll-triggered
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -41,10 +29,9 @@ document.getElementById('giftBtn').addEventListener('click', () => {
     confetti({ particleCount: 200, spread: 70 });
 });
 
-// Tombol RSVP
-document.getElementById('rsvpBtn').addEventListener('click', () => {
-    alert('Terima kasih sudah "hadir"! Semoga Anggita bahagia selalu! 🎉');
-    confetti({ particleCount: 100, spread: 50 });
+// Tombol confetti
+document.getElementById('confettiBtn').addEventListener('click', () => {
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
 });
 
 // Confetti otomatis saat load
