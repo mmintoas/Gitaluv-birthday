@@ -34,7 +34,7 @@ document.getElementById('confettiBtn').addEventListener('click', () => {
     confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
 });
 
-// Tombol surprise
+// Tombol surprise (sekarang berfungsi dengan animasi shake)
 document.getElementById('surpriseBtn').addEventListener('click', () => {
     document.body.classList.add('shake');
     setTimeout(() => document.body.classList.remove('shake'), 1000);
@@ -42,12 +42,11 @@ document.getElementById('surpriseBtn').addEventListener('click', () => {
     alert('Surprise! Kamu adalah yang terbaik, Anggita! 🎉😍');
 });
 
-// Lagu1 otomatis diputar saat load
+// Lagu1 otomatis diputar saat load, dengan fallback jika autoplay diblokir
 const lagu1 = document.getElementById('lagu1');
 window.addEventListener('load', () => {
     lagu1.play().catch(() => {
-        // Fallback jika autoplay diblokir browser
-        console.log('Autoplay diblokir, klik tombol manual.');
+        alert('Browser memblokir autoplay lagu. Klik tombol "Play Lagu Tambahan" untuk memutar manual!');
     });
 });
 
@@ -64,5 +63,4 @@ document.getElementById('playLaguBtn').addEventListener('click', () => {
 
 // Confetti otomatis saat load
 window.addEventListener('load', () => {
-    confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
-});
+    confetti({ particleCount: 50, spread: 60, origin
