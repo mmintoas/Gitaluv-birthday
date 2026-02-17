@@ -1,71 +1,56 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Ulang Tahun Anggita Febrianti 🎉</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="invitation">
-        <section class="intro animate-on-scroll">
-            <h1 class="title">Ucapan Selamat Ulang Tahun Anggita Febrianti</h1>
-            <p class="subtitle">Semoga hari ini penuh kegembiraan, kesehatan, dan berkah tak terhingga! Usia Sekarang: 26 Tahun</p>
-            <button id="confettiBtn" class="btn">Klik untuk Confetti! 🎊</button>
-            <button id="surpriseBtn" class="btn">Surprise Me! 😲</button>
-        </section>
-        
-        <section class="philosophy animate-on-scroll">
-            <h2>Filosofi Jawa untuk Umur 26</h2>
-            <p>Di budaya Jawa, umur 26 sering dianggap sebagai masa "ngrembaka" atau fase dimana manusia mulai memetik hasil dari usaha masa lalu, seperti pohon yang telah bertahun-tahun tumbuh dan kini berbuah lebat. Angka 2+6=8 melambangkan kekuatan, kesuksesan, dan keseimbangan dalam hidup. Semoga Anggita terus berkembang seperti pohon yang kuat, berbuah manis, dan memberikan naungan bagi orang-orang di sekitarnya. Aamiin. 🌳✨</p>
-        </section>
-        
-        <section class="funny-words animate-on-scroll">
-            <h2>Kata-Kata Lucu untuk Anggita</h2>
-            <p>"Usia bertambah, tapi kenangan tetap muda! Jangan khawatir, Anggita, usia bukan angka – itu level baru di game hidup! 🎮😄"</p>
-            <p>"Selamat ulang tahun! Semoga tahun ini kamu dapat banyak 'level up' dalam hidup, seperti naik rank di game favoritmu. Tapi jangan lupa istirahat, ya! 💻😂"</p>
-            <p>"Anggita, kamu seperti kue ulang tahun: Manis, spesial, dan selalu bikin orang senyum. Tapi jangan makan terlalu banyak, nanti gendut! 🍰🤣"</p>
-        </section>
-        
-        <section class="gallery animate-on-scroll">
-            <h2>Galeri Kenangan Anggita</h2>
-            <div class="vertical-gallery">
-                <img src="images/1.jpg" alt="Foto 1" class="photo frame1" data-src="images/1.jpg">
-                <img src="images/2.jpg" alt="Foto 2" class="photo frame2" data-src="images/2.jpg">
-                <img src="images/3.jpg" alt="Foto 3" class="photo frame3" data-src="images/3.jpg">
-                <img src="images/4.jpg" alt="Foto 4" class="photo frame4" data-src="images/4.jpg">
-                <img src="images/5.jpg" alt="Foto 5" class="photo frame5" data-src="images/5.jpg">
-            </div>
-            <p class="instruction">Klik foto untuk melihat lebih besar! Setiap frame unik untuk kenangan spesialmu. 📸</p>
-        </section>
-        
-        <section class="message animate-on-scroll">
-            <h2>Doa dan Harapan untuk Anggita</h2>
-            <p class="doa">
-                🥳 Selamat ulang tahun dengan bertambahnya usia menjadi lebih baik lagi, ibadahnya ditingkatkan, dilancarkan rejekinya, di lancarkan segala urusan nya, di berikan kesehatan, berbakti kepada orang tua, dimudahkan segala urusan nya, di tambah nikmat ibadahnya, ditambah kesabaran nya, selamat Dunia Dan Akhirat. <em>*Aamiin Ya Robbal Alamin.*</em> Semangattt 😄
-            </p>
-            <p class="extra">Semoga Anggita selalu bahagia, sukses, dan dikelilingi orang-orang yang peduli! Kamu adalah inspirasi bagi banyak orang. 🌟</p>
-        </section>
-        
-        <section class="surprise animate-on-scroll">
-            <h2>Hadiah Virtual Khusus!</h2>
-            <button id="giftBtn" class="btn">Buka Hadiah! 🎁</button>
-            <p id="giftMessage" class="hidden">Selamat! Hadiahmu adalah senyum tak terlupakan dan doa terbaik. Semoga hidupmu penuh warna! 😊✨</p>
-        </section>
-        
-        <footer class="footer animate-on-scroll">
-            <p>Dibuat dengan cinta untuk Anggita Febrianti. Semoga hari ulang tahunmu unforgettable! 🎈</p>
-            <audio id="bgMusic" src="assets/birthday-song.mp3" loop autoplay></audio>
-            <audio id="lagu1" src="assets/lagu1.mp3" loop></audio>
-        </footer>
-    </div>
-    
-    <div id="modal" class="modal">
-        <span class="close">&times;</span>
-        <img id="modalImg" class="modal-content">
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+// Animasi scroll-triggered
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-on-scroll');
+        }
+    });
+});
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// Modal untuk foto
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const closeBtn = document.querySelector('.close');
+document.querySelectorAll('.photo').forEach(img => {
+    img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.dataset.src;
+    });
+});
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+// Tombol hadiah
+document.getElementById('giftBtn').addEventListener('click', () => {
+    const message = document.getElementById('giftMessage');
+    message.classList.remove('hidden');
+    confetti({ particleCount: 200, spread: 70 });
+});
+
+// Tombol confetti
+document.getElementById('confettiBtn').addEventListener('click', () => {
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+});
+
+// Tombol surprise (berfungsi dengan animasi shake)
+document.getElementById('surpriseBtn').addEventListener('click', () => {
+    document.body.classList.add('shake');
+    setTimeout(() => document.body.classList.remove('shake'), 1000);
+    confetti({ particleCount: 300, spread: 100 });
+    alert('Surprise! Kamu adalah yang terbaik, Anggita! 🎉😍');
+});
+
+// Lagu1 otomatis diputar saat load, dengan fallback jika autoplay diblokir
+const lagu1 = document.getElementById('lagu1');
+window.addEventListener('load', () => {
+    lagu1.play().catch(() => {
+        alert('Browser memblokir autoplay lagu. Refresh halaman atau izinkan autoplay untuk mendengarkan lagu!');
+    });
+});
+
+// Confetti otomatis saat load
+window.addEventListener('load', () => {
+    confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+});
