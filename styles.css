@@ -163,6 +163,10 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
+.start-btn {
+    background: linear-gradient(45deg, #2ecc71, #3498db);
+}
+
 .hidden {
     display: none;
 }
