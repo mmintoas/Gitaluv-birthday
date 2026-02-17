@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ucapan Selamat Ulang Tahun Anggita Febrianti 🎉</title>
+    <title>Selamat Ulang Tahun Anggita Febrianti 🎉</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,6 +12,7 @@
             <h1 class="title">Ucapan Selamat Ulang Tahun Anggita Febrianti</h1>
             <p class="subtitle">Semoga hari ini penuh kegembiraan, kesehatan, dan berkah tak terhingga! Usia Sekarang: 26 Tahun</p>
             <button id="confettiBtn" class="btn">Klik untuk Confetti! 🎊</button>
+            <button id="surpriseBtn" class="btn">Surprise Me! 😲</button>
         </section>
         
         <section class="philosophy animate-on-scroll">
@@ -28,14 +29,12 @@
         
         <section class="gallery animate-on-scroll">
             <h2>Galeri Kenangan Anggita</h2>
-            <div class="photo-grid">
-                <img src="images/1.jpg" alt="Foto 1" class="photo" data-src="images/1.jpg">
-                <img src="images/2.jpg" alt="Foto 2" class="photo" data-src="images/2.jpg">
-                <img src="images/3.jpg" alt="Foto 3" class="photo" data-src="images/3.jpg">
-                <img src="images/4.jpg" alt="Foto 4" class="photo" data-src="images/4.jpg">
-                <img src="images/5.jpg" alt="Foto 5" class="photo" data-src="images/5.jpg">
+            <div class="full-gallery">
+                <img id="galleryImg" src="images/1.jpg" alt="Foto Kenangan" class="full-photo">
+                <button id="prevBtn" class="nav-btn">⬅ Previous</button>
+                <button id="nextBtn" class="nav-btn">Next ➡</button>
             </div>
-            <p class="instruction">Klik foto untuk melihat lebih besar! 📸</p>
+            <p class="instruction">Gunakan tombol untuk berpindah foto satu per satu! 📸</p>
         </section>
         
         <section class="message animate-on-scroll">
@@ -52,15 +51,16 @@
             <p id="giftMessage" class="hidden">Selamat! Hadiahmu adalah senyum tak terlupakan dan doa terbaik. Semoga hidupmu penuh warna! 😊✨</p>
         </section>
         
+        <section class="music animate-on-scroll">
+            <h2>Lagu Tambahan untuk Anggita</h2>
+            <button id="playLaguBtn" class="btn">Play Lagu Tambahan 🎵</button>
+            <audio id="lagu1" src="assets/lagu1.mp3"></audio>
+        </section>
+        
         <footer class="footer animate-on-scroll">
             <p>Dibuat dengan cinta untuk Anggita Febrianti. Semoga hari ulang tahunmu unforgettable! 🎈</p>
             <audio id="bgMusic" src="assets/birthday-song.mp3" loop autoplay></audio>
         </footer>
-    </div>
-    
-    <div id="modal" class="modal">
-        <span class="close">&times;</span>
-        <img id="modalImg" class="modal-content">
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
