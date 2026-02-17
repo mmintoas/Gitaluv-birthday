@@ -1,34 +1,29 @@
 const images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg', 'images/5.jpg'];
-let currentIndex = 0;
-let isPlaying = false;
-let interval;
-
-const slideshow = document.getElementById('slideshow');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const confettiBtn = document.getElementById('confettiBtn');
-const loveBtn = document.getElementById('loveBtn');
+const mainImage = document.getElementById('mainImage');
 const thumbs = document.querySelectorAll('.thumb');
+const confettiBtn = document.getElementById('confettiBtn');
 
-function showImage(index) {
-    currentIndex = index;
-    slideshow.src = images[currentIndex];
-    slideshow.style.transform = 'scale(1.1)';
-    setTimeout(() => slideshow.style.transform = 'scale(1)', 500);
+// Fungsi untuk ganti gambar utama
+function changeImage(index) {
+    mainImage.style.opacity = 0; // Fade out
+    setTimeout(() => {
+        mainImage.src = images[index];
+        mainImage.style.opacity = 1; // Fade in
+    }, 250);
 }
 
-function showNextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
-}
+// Event listener untuk thumbnail
+thumbs.forEach((thumb, index) => {
+    thumb.addEventListener('click', () => {
+        changeImage(index);
+    });
+});
 
-function startSlideshow() {
-    if (!isPlaying) {
-        interval = setInterval(showNextImage, 3000);
-        isPlaying = true;
-        playPauseBtn.textContent = '⏸️ Berhenti Slideshow';
-    }
-}
-
-function stopSlideshow() {
-    clearInterval(interval);
-    isPlaying = false;
+// Event listener untuk tombol confetti
+confettiBtn.addEventListener('click', () => {
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
+});
