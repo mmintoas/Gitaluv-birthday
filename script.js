@@ -1,29 +1,3 @@
-const images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg', 'images/5.jpg'];
-let currentIndex = 0;
-const galleryImg = document.getElementById('galleryImg');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-
-// Fungsi untuk ganti foto galeri
-function showImage(index) {
-    galleryImg.style.opacity = 0;
-    setTimeout(() => {
-        galleryImg.src = images[index];
-        galleryImg.style.opacity = 1;
-    }, 250);
-}
-
-// Navigasi galeri
-prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage(currentIndex);
-});
-
-nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
-});
-
 // Animasi scroll-triggered
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -33,6 +7,20 @@ const observer = new IntersectionObserver((entries) => {
     });
 });
 document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// Modal untuk foto
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const closeBtn = document.querySelector('.close');
+document.querySelectorAll('.photo').forEach(img => {
+    img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.dataset.src;
+    });
+});
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
 
 // Tombol hadiah
 document.getElementById('giftBtn').addEventListener('click', () => {
@@ -54,8 +42,16 @@ document.getElementById('surpriseBtn').addEventListener('click', () => {
     alert('Surprise! Kamu adalah yang terbaik, Anggita! 🎉😍');
 });
 
-// Tombol play lagu tambahan
+// Lagu1 otomatis diputar saat load
 const lagu1 = document.getElementById('lagu1');
+window.addEventListener('load', () => {
+    lagu1.play().catch(() => {
+        // Fallback jika autoplay diblokir browser
+        console.log('Autoplay diblokir, klik tombol manual.');
+    });
+});
+
+// Tombol play/pause lagu tambahan
 document.getElementById('playLaguBtn').addEventListener('click', () => {
     if (lagu1.paused) {
         lagu1.play();
