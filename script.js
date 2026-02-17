@@ -5,15 +5,25 @@ let interval;
 
 const slideshow = document.getElementById('slideshow');
 const playPauseBtn = document.getElementById('playPauseBtn');
+const confettiBtn = document.getElementById('confettiBtn');
+const loveBtn = document.getElementById('loveBtn');
+const thumbs = document.querySelectorAll('.thumb');
+
+function showImage(index) {
+    currentIndex = index;
+    slideshow.src = images[currentIndex];
+    slideshow.style.transform = 'scale(1.1)';
+    setTimeout(() => slideshow.style.transform = 'scale(1)', 500);
+}
 
 function showNextImage() {
     currentIndex = (currentIndex + 1) % images.length;
-    slideshow.src = images[currentIndex];
+    showImage(currentIndex);
 }
 
 function startSlideshow() {
     if (!isPlaying) {
-        interval = setInterval(showNextImage, 3000); // Ganti gambar setiap 3 detik
+        interval = setInterval(showNextImage, 3000);
         isPlaying = true;
         playPauseBtn.textContent = '⏸️ Berhenti Slideshow';
     }
@@ -22,16 +32,3 @@ function startSlideshow() {
 function stopSlideshow() {
     clearInterval(interval);
     isPlaying = false;
-    playPauseBtn.textContent = '▶️ Mainkan Slideshow (Klik untuk Berhenti!)';
-}
-
-playPauseBtn.addEventListener('click', () => {
-    if (isPlaying) {
-        stopSlideshow();
-    } else {
-        startSlideshow();
-    }
-});
-
-// Mulai slideshow otomatis saat halaman load
-startSlideshow();
